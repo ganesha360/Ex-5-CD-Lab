@@ -1,71 +1,68 @@
-# Ex-4-LETTER-FOLLOWED-BY-ANY-NUMBER-OF-LETTERS-OR-DIGITS-USING-YACC-USING-YACC
-RECOGNITION OF A VALID VARIABLE WHICH STARTS WITH A LETTER FOLLOWED BY ANY NUMBER OF LETTERS OR DIGITS USING YACC
-# NAME : KEERTHANA JAYASRI S K
-# REGISTER NO: 212222110019
-# Date: 17/10/24
+# Ex-5-RECOGNITION-OF-THE-GRAMMAR-anb-where-n-10-USING-YACC
+## RECOGNITION OF THE GRAMMAR(anb where n>=10) USING YACC
+# Name : Madhuvathani.v
+# Reg No: 212223040107
+# Date: 19-10-24
 # Aim:
-To write a YACC program to recognize a valid variable which starts with a letter followed by any number of letters or digits.
+To write a YACC program to recognize the grammar anb where n>=10.
 # ALGORITHM
 1.	Start the program.
 2.	Write a program in the vi editor and save it with .l extension.
-3.	In the lex program, write the translation rules for the keywords int, float and double and for the identifier.
+3.	In the lex program, write the translation rules for the variables a and b.
 4.	Write a program in the vi editor and save it with .y extension.
 5.	Compile the lex program with lex compiler to produce output file as lex.yy.c. eg $ lex filename.l
-6.	Compile the yacc program with YACC compiler to produce output file as y.tab.c. eg $ yacc –d arith_id.y
+6.	Compile the yacc program with yacc compiler to produce output file as y.tab.c. eg $ yacc –d arith_id.y
 7.	Compile these with the C compiler as gcc lex.yy.c y.tab.c
-8.	Enter a statement as input and the valid variables are identified as output.
-# PROGRAM
+8.	Enter a string as input and it is identified as valid or invalid.
+# PROGRAM:
+### Grammar.l
 ```
-Program name:ex4.l
 %{
-/* This LEX program returns the tokens for the Expression */
-#include"y.tab.h"
+#include "y.tab.h"
 %}
+
 %%
-"int" {return INT;}
-"float" {return FLOAT;}
-"double" {return DOUBLE;}
-[a-zA-Z]*[0-9]* {printf("\nIdentifier is %s",yytext);
-return ID;
-}
-. return yytext[0];
-\n return 0;
+a    { return A; }  // Recognize 'a' as token A
+b    { return B; }  // Recognize 'b' as token B
+.    { return 0; }  // End of input
 %%
-int yywrap()
-{
-return 1;
-}
-Program name:ex4.y
-%{
-#include<stdio.h>
-/* This YACC program is for recognising the Expression*/
- %}
-%token ID INT FLOAT DOUBLE
-%%
-D: T L
-;
-L: L,ID
-| ID
-;
-T: INT
-| FLOAT
-| DOUBLE
-;
-%%
-extern FILE*yyin;
-main()
-{
-do
-{
-yyparse();
-}while(!feof(yyin));
-}
-yyerror(char*s)
-{
+
+int yywrap() {
+    return 1;
 }
 ```
-# Output
-![image](https://github.com/user-attachments/assets/4698ddb1-4df8-41b1-8467-4c40bac9e157)
 
-# Result
-A YACC program to recognize a valid variable which starts with a letter followed by any number of letters or digits is executed successfully and the output is verified.
+
+### Grammar.y
+```
+%{
+#include <stdio.h>
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token A B
+
+%%
+S   : A A A A A A A A A A B    { printf("Valid string\n"); }
+    | A S B                    { printf("Valid string\n"); }
+    ;
+
+%%
+
+int main() {
+    printf("Enter a string:\n");
+    yyparse();
+    return 0;
+}
+
+void yyerror(const char *s) {
+    printf("Invalid string\n");
+}
+```
+
+# OUTPUT
+![image](https://github.com/user-attachments/assets/30bba7c3-a62c-4541-b7b4-e85dd78eafff)
+
+# RESULT
+The YACC program to recognize the grammar anb where n>=10 is executed successfully and the output is verified.
