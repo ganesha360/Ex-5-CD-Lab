@@ -34,7 +34,7 @@ int yywrap() {
 
 
 ### Grammar.y
-```
+```py
 %{
 #include <stdio.h>
 int yylex(void);
