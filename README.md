@@ -1,8 +1,8 @@
 # Ex-5-RECOGNITION-OF-THE-GRAMMAR-anb-where-n-10-USING-YACC
 ## RECOGNITION OF THE GRAMMAR(anb where n>=10) USING YACC
-# Name : Madhuvathani.v
-# Reg No: 212223040107
-# Date: 19-10-24
+# Name : GANESH R
+# Reg No: 212222240029
+# Date: 
 # Aim:
 To write a YACC program to recognize the grammar anb where n>=10.
 # ALGORITHM
@@ -16,7 +16,7 @@ To write a YACC program to recognize the grammar anb where n>=10.
 8.	Enter a string as input and it is identified as valid or invalid.
 # PROGRAM:
 ### Grammar.l
-```
+```py
 %{
 #include "y.tab.h"
 %}
